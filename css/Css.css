@@ -1,0 +1,46 @@
+/* Cấu hình khối hộp kỹ năng */
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Phần chữ hiển thị tên và % */
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+}
+
+.skill-percentage {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* Khung nền đen của thanh trạng thái */
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #050505;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Dải màu chuyển động phát sáng chạy dọc */
+.progress-fill {
+    height: 100%;
+    border-radius: 20px;
+    /* Hiệu ứng chuyển màu gradient đúng chuẩn từ tím sang xanh cyan */
+    background: linear-gradient(90deg, #6366f1 0%, #06b6d4 80%, #22d3ee 100%);
+    /* Tạo hiệu ứng phủ bóng phát sáng mờ ở đầu thanh */
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.7);
+    transition: width 1s ease-in-out;
+}
