@@ -526,6 +526,29 @@
             overflow-x: auto;
             scroll-snap-type: x proximity;
             padding-bottom: 16px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 194, 255, .35) transparent;
+        }
+
+        .hiw-row::-webkit-scrollbar,
+        .strip-imgs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .hiw-row::-webkit-scrollbar-track,
+        .strip-imgs::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .hiw-row::-webkit-scrollbar-thumb,
+        .strip-imgs::-webkit-scrollbar-thumb {
+            background: rgba(0, 194, 255, .35);
+            border-radius: 2px;
+        }
+
+        .hiw-row::-webkit-scrollbar-thumb:hover,
+        .strip-imgs::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 194, 255, .6);
         }
 
         .hiw-col {
@@ -627,6 +650,8 @@
             gap: 8px;
             overflow-x: auto;
             overflow-y: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 194, 255, .35) transparent;
         }
 
         .strip-imgs img {
