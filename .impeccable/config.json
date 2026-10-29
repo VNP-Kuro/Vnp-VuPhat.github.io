@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-29T04:04:28.281Z",
+        "reason": "Contact section closing statement (.contact-row p): short 3-4 line display sentence per taste-skill contact-band blueprint, which specifies leading 1.1; we use 1.25 (looser than the spec). Intentional tight leading for a large-set short statement, not dense body prose."
+      }
+    ]
+  }
+}
