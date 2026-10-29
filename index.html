@@ -891,13 +891,34 @@
             transform: translateY(0);
         }
 
-        .reveal-stagger.in>* {
-            transition: opacity .6s cubic-bezier(.16, 1, .3, 1), transform .6s cubic-bezier(.16, 1, .3, 1);
-        }
-
         .reveal-stagger>* {
             opacity: 0;
             transform: translateY(18px);
+            transition: opacity .6s cubic-bezier(.16, 1, .3, 1), transform .6s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .reveal-stagger>*:nth-child(1) {
+            transition-delay: 0ms;
+        }
+
+        .reveal-stagger>*:nth-child(2) {
+            transition-delay: 70ms;
+        }
+
+        .reveal-stagger>*:nth-child(3) {
+            transition-delay: 140ms;
+        }
+
+        .reveal-stagger>*:nth-child(4) {
+            transition-delay: 210ms;
+        }
+
+        .reveal-stagger>*:nth-child(5) {
+            transition-delay: 280ms;
+        }
+
+        .reveal-stagger>*:nth-child(6) {
+            transition-delay: 350ms;
         }
 
         .reveal-stagger.in>* {
@@ -949,10 +970,10 @@
                         </div>
                         <div>
                             <div class="f-lbl">Kinh nghiệm</div>
-                            <div class="f-val">3+ năm hạ tầng giao thông</div>
+                            <div class="f-val">4+ năm hạ tầng giao thông</div>
                         </div>
                     </div>
-                    <p>Gần ba năm làm kỹ sư xây dựng, trực tiếp xử lý bản vẽ, bóc tách khối lượng và quản lý tổ đội
+                    <p>Hơn bốn năm làm kỹ sư xây dựng, trực tiếp xử lý bản vẽ, bóc tách khối lượng và quản lý tổ đội
                         tại các dự án hạ tầng trọng điểm quốc gia. Vai trò cốt lõi hiện nay là Kỹ sư R&amp;D BIM
                         (Tekla &amp; Revit), xây mô hình LOD 300–400, phối hợp phát hiện xung đột và tích hợp tiến
                         độ 4D/5D. Song song đó, tôi tự học lập trình và ứng dụng AI Agent để tự động hoá bóc tách,
@@ -1048,7 +1069,7 @@
                 <h2 class="sec-h reveal">Năng lực</h2>
                 <div class="reveal-stagger">
                     <div class="stat-row">
-                        <div class="stat-fig">3+</div>
+                        <div class="stat-fig">4+</div>
                         <div class="stat-txt">năm kinh nghiệm hạ tầng giao thông tại các dự án trọng điểm quốc gia.
                         </div>
                     </div>
@@ -1327,8 +1348,8 @@
     <script>
         /* ── Hero ring of frames ── */
         var RING_IMGS = ['cau_vuot_ai.jpg', 'cao_toc_ai.jpg', 'model-tekla-xe-duc.jpg', 'model-revit-cang-thuy.jpg',
-            'bim-hero-bg.jpg', 'model-dynamo-dam-ban.jpg', 'bim-field-engineer.jpg', 'model-tekla-da-giao.jpg',
-            'cau-vuot.jpg', 'cao-toc.jpg', 'model-planning-4d.jpg', 'bim-model-3d.jpg', 'automation.jpg', 'decision-pt.jpg'];
+            'bim-hero-bg.jpg', 'model-dynamo-dam-ban.jpg', 'model-revit-cau-tan-an.jpg', 'model-tekla-da-giao.jpg',
+            'model-planning-p6.jpg', 'cao-toc.jpg', 'model-planning-4d.jpg', 'bim-model-3d.jpg', 'model-grasshopper-tekla.jpg', 'decision-pt.jpg'];
         var ring = document.getElementById('ring');
         var isSmall = window.matchMedia('(max-width: 760px)').matches;
         var rx = isSmall ? 48 : 40, ry = isSmall ? 30 : 36;
