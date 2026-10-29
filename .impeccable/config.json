@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-10-29T04:04:28.281Z",
         "reason": "Contact section closing statement (.contact-row p): short 3-4 line display sentence per taste-skill contact-band blueprint, which specifies leading 1.1; we use 1.25 (looser than the spec). Intentional tight leading for a large-set short statement, not dense body prose."
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-29T04:15:20.843Z",
+        "reason": "user confirmed: explicitly asked for the livelier/glowing tech look back ('cần sinh động công nghệ như bản 1 ấy') after the fully flat/no-glow redesign read as too plain. Pink glow is intentional and scoped to CTA, stat figures, hover states and portrait border only."
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-29T04:15:21.067Z",
+        "reason": "user confirmed: same request, used as a subtle pulsing hero backdrop glow instead of a flat ground, to match the energetic 'tech' feel the user asked for."
       }
     ]
   }
