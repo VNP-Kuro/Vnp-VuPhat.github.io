@@ -262,46 +262,40 @@
             position: absolute;
             inset: 0;
             z-index: 2;
-            transition: transform .4s ease-out;
+            perspective: 1300px;
+            transition: transform .5s ease-out;
         }
 
         .ring-spin {
             position: absolute;
             inset: 0;
-            animation: ringSpin 120s linear infinite;
+            transform-style: preserve-3d;
+            animation: ringSpin3D 90s linear infinite;
         }
 
-        @keyframes ringSpin {
+        @keyframes ringSpin3D {
             from {
-                transform: rotate(0deg);
+                transform: rotateY(0deg);
             }
 
             to {
-                transform: rotate(360deg);
+                transform: rotateY(360deg);
             }
         }
 
         .ring .frame {
             position: absolute;
+            left: 50%;
+            top: 50%;
             overflow: hidden;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 0 1px rgba(0, 194, 255, .22);
+            transform-style: preserve-3d;
+            box-shadow: 0 0 0 1px rgba(0, 194, 255, .28);
+            backface-visibility: hidden;
         }
 
         .frame-inner {
             width: 100%;
             height: 100%;
-            animation: frameCounterSpin 120s linear infinite;
-        }
-
-        @keyframes frameCounterSpin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(-360deg);
-            }
         }
 
         .ring .frame img {
@@ -320,8 +314,7 @@
         @media (prefers-reduced-motion: reduce) {
 
             .hero::before,
-            .ring-spin,
-            .frame-inner {
+            .ring-spin {
                 animation: none;
             }
         }
@@ -1500,21 +1493,20 @@
         var ring = document.getElementById('ring');
         var ringSpin = document.getElementById('ringSpin');
         var isSmall = window.matchMedia('(max-width: 760px)').matches;
-        var rx = isSmall ? 48 : 40, ry = isSmall ? 30 : 36;
+        var ringRadius = isSmall ? 190 : 350;
+        var n = RING_IMGS.length;
         RING_IMGS.forEach(function (name, i) {
-            var n = RING_IMGS.length;
-            var angle = (i / n) * Math.PI * 2 - Math.PI / 2;
-            var x = 50 + rx * Math.cos(angle);
-            var y = 50 + ry * Math.sin(angle);
-            var size = isSmall ? 70 : (100 + 45 * Math.abs(Math.sin(angle)));
+            var angleDeg = (i / n) * 360;
+            var w = isSmall ? 72 : 128;
             var ratio = i % 2 === 0 ? 1.25 : 0.8;
+            var yJitter = Math.sin(i * 2.4) * (isSmall ? 26 : 64);
+            var tilt = Math.sin(i * 3.1) * 6;
             var f = document.createElement('div');
             f.className = 'frame';
-            f.style.left = x + '%';
-            f.style.top = y + '%';
-            f.style.width = size + 'px';
-            f.style.height = (size * ratio) + 'px';
-            f.style.transform = 'translate(-50%,-50%) rotate(' + ((angle * 180 / Math.PI) * 0.18) + 'deg)';
+            f.style.width = w + 'px';
+            f.style.height = (w * ratio) + 'px';
+            f.style.transform = 'translate(-50%,-50%) translateY(' + yJitter + 'px) rotateY(' +
+                angleDeg + 'deg) translateZ(' + ringRadius + 'px) rotateZ(' + tilt + 'deg)';
             var inner = document.createElement('div');
             inner.className = 'frame-inner';
             var img = document.createElement('img');
@@ -1526,18 +1518,20 @@
             ringSpin.appendChild(f);
         });
 
-        /* ── Hero ring mouse parallax ── */
+        /* ── Hero ring: 3D tilt + mouse parallax look-around ── */
         var heroEl = document.getElementById('home');
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var ringBaseTilt = isSmall ? 14 : 20;
+        ring.style.transform = 'rotateX(' + ringBaseTilt + 'deg) rotateY(0deg)';
         if (heroEl && !reduceMotion) {
             heroEl.addEventListener('mousemove', function (e) {
                 var r = heroEl.getBoundingClientRect();
                 var nx = (e.clientX - r.left) / r.width - 0.5;
                 var ny = (e.clientY - r.top) / r.height - 0.5;
-                ring.style.transform = 'translate(' + (nx * -18) + 'px,' + (ny * -14) + 'px) scale(1.015)';
+                ring.style.transform = 'rotateX(' + (ringBaseTilt + ny * -12) + 'deg) rotateY(' + (nx * 16) + 'deg)';
             });
             heroEl.addEventListener('mouseleave', function () {
-                ring.style.transform = 'translate(0,0) scale(1)';
+                ring.style.transform = 'rotateX(' + ringBaseTilt + 'deg) rotateY(0deg)';
             });
         }
 
