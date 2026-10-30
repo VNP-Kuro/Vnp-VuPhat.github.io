@@ -288,11 +288,6 @@
             box-shadow: 0 0 0 1px rgba(0, 194, 255, .22);
         }
 
-        .ring .frame.frame-portrait {
-            box-shadow: 0 0 0 2px var(--accent), 0 0 24px var(--accent-glow);
-            z-index: 1;
-        }
-
         .frame-inner {
             width: 100%;
             height: 100%;
@@ -317,11 +312,6 @@
             transition: filter .4s ease, transform .4s ease;
         }
 
-        .ring .frame.frame-portrait img {
-            filter: none;
-            object-position: top center;
-        }
-
         .ring .frame:hover img {
             filter: grayscale(0) contrast(1.1) brightness(1.08);
             transform: scale(1.08);
@@ -343,6 +333,22 @@
             text-align: center;
             max-width: 620px;
             padding: 24px;
+        }
+
+        .hero-avatar {
+            width: 112px;
+            height: 112px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 0 2px var(--accent), 0 0 28px var(--accent-glow);
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
         }
 
         .hero-core h1 {
@@ -440,6 +446,12 @@
 
             .hero-core {
                 padding: 12px;
+            }
+
+            .hero-avatar {
+                width: 84px;
+                height: 84px;
+                margin-bottom: 18px;
             }
 
             .hero-core h1 {
@@ -1062,6 +1074,9 @@
         <div class="hero-scan" aria-hidden="true"></div>
 
         <div class="hero-core reveal" id="heroCore">
+            <div class="hero-avatar">
+                <img src="images/chandung.jpg" alt="Vũ Ngọc Phát" />
+            </div>
             <h1><span>VŨ NGỌC PHÁT</span><span>BIM + AI AGENT</span></h1>
             <p>BIM hạ tầng giao thông &amp; trợ lý AI cho thiết kế, thi công.</p>
             <a href="#contact" class="btn">Liên hệ</a>
@@ -1479,7 +1494,7 @@
 
     <script>
         /* ── Hero ring of frames ── */
-        var RING_IMGS = ['chandung.jpg', 'cau_vuot_ai.jpg', 'cao_toc_ai.jpg', 'model-tekla-xe-duc.jpg', 'model-revit-cang-thuy.jpg',
+        var RING_IMGS = ['cau_vuot_ai.jpg', 'cao_toc_ai.jpg', 'model-tekla-xe-duc.jpg', 'model-revit-cang-thuy.jpg',
             'bim-hero-bg.jpg', 'model-dynamo-dam-ban.jpg', 'model-revit-cau-tan-an.jpg', 'model-tekla-da-giao.jpg',
             'model-planning-p6.jpg', 'cao-toc.jpg', 'model-planning-4d.jpg', 'bim-model-3d.jpg', 'model-grasshopper-tekla.jpg', 'decision-pt.jpg'];
         var ring = document.getElementById('ring');
@@ -1488,24 +1503,23 @@
         var rx = isSmall ? 48 : 40, ry = isSmall ? 30 : 36;
         RING_IMGS.forEach(function (name, i) {
             var n = RING_IMGS.length;
-            var isPortrait = i === 0;
             var angle = (i / n) * Math.PI * 2 - Math.PI / 2;
             var x = 50 + rx * Math.cos(angle);
             var y = 50 + ry * Math.sin(angle);
-            var size = isPortrait ? (isSmall ? 86 : 126) : (isSmall ? 70 : (100 + 45 * Math.abs(Math.sin(angle))));
-            var ratio = isPortrait ? 1.15 : (i % 2 === 0 ? 1.25 : 0.8);
+            var size = isSmall ? 70 : (100 + 45 * Math.abs(Math.sin(angle)));
+            var ratio = i % 2 === 0 ? 1.25 : 0.8;
             var f = document.createElement('div');
-            f.className = isPortrait ? 'frame frame-portrait' : 'frame';
+            f.className = 'frame';
             f.style.left = x + '%';
             f.style.top = y + '%';
             f.style.width = size + 'px';
             f.style.height = (size * ratio) + 'px';
-            f.style.transform = 'translate(-50%,-50%) rotate(' + (isPortrait ? 0 : (angle * 180 / Math.PI) * 0.18) + 'deg)';
+            f.style.transform = 'translate(-50%,-50%) rotate(' + ((angle * 180 / Math.PI) * 0.18) + 'deg)';
             var inner = document.createElement('div');
             inner.className = 'frame-inner';
             var img = document.createElement('img');
             img.src = 'images/' + name;
-            img.alt = isPortrait ? 'Vũ Ngọc Phát' : '';
+            img.alt = '';
             img.loading = i < 4 ? 'eager' : 'lazy';
             inner.appendChild(img);
             f.appendChild(inner);
