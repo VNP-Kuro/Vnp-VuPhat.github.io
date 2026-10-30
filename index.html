@@ -611,7 +611,6 @@
             display: flex;
             gap: 32px;
             overflow-x: auto;
-            scroll-snap-type: x proximity;
             padding-bottom: 16px;
             scrollbar-width: thin;
             scrollbar-color: rgba(0, 194, 255, .35) transparent;
@@ -640,7 +639,6 @@
 
         .hiw-col {
             flex: 0 0 280px;
-            scroll-snap-align: start;
             display: flex;
             flex-direction: column;
         }
@@ -1571,6 +1569,26 @@
             heroEl.addEventListener('mouseleave', function () {
                 ring.style.transform = 'rotateX(' + ringBaseTilt + 'deg) rotateY(0deg)';
             });
+        }
+
+        /* ── AI Agent workflow strip: auto-slide, pause on hover/touch ── */
+        var hiwRow = document.querySelector('.hiw-row');
+        if (hiwRow && !reduceMotion) {
+            var hiwCols = Array.prototype.slice.call(hiwRow.children);
+            hiwCols.forEach(function (col) { hiwRow.appendChild(col.cloneNode(true)); });
+            var hiwLoopWidth = hiwRow.scrollWidth / 2;
+            var hiwPaused = false;
+            hiwRow.addEventListener('mouseenter', function () { hiwPaused = true; });
+            hiwRow.addEventListener('mouseleave', function () { hiwPaused = false; });
+            hiwRow.addEventListener('touchstart', function () { hiwPaused = true; }, { passive: true });
+            hiwRow.addEventListener('touchend', function () { hiwPaused = false; });
+            (function hiwTick() {
+                if (!hiwPaused) {
+                    hiwRow.scrollLeft += 0.6;
+                    if (hiwRow.scrollLeft >= hiwLoopWidth) hiwRow.scrollLeft -= hiwLoopWidth;
+                }
+                requestAnimationFrame(hiwTick);
+            })();
         }
 
         /* ── Count-up stat numbers ── */
