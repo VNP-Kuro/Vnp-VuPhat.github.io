@@ -265,11 +265,48 @@
             transition: transform .4s ease-out;
         }
 
+        .ring-spin {
+            position: absolute;
+            inset: 0;
+            animation: ringSpin 120s linear infinite;
+        }
+
+        @keyframes ringSpin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         .ring .frame {
             position: absolute;
             overflow: hidden;
             transform: translate(-50%, -50%);
             box-shadow: 0 0 0 1px rgba(0, 194, 255, .22);
+        }
+
+        .ring .frame.frame-portrait {
+            box-shadow: 0 0 0 2px var(--accent), 0 0 24px var(--accent-glow);
+            z-index: 1;
+        }
+
+        .frame-inner {
+            width: 100%;
+            height: 100%;
+            animation: frameCounterSpin 120s linear infinite;
+        }
+
+        @keyframes frameCounterSpin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-360deg);
+            }
         }
 
         .ring .frame img {
@@ -280,13 +317,21 @@
             transition: filter .4s ease, transform .4s ease;
         }
 
+        .ring .frame.frame-portrait img {
+            filter: none;
+            object-position: top center;
+        }
+
         .ring .frame:hover img {
             filter: grayscale(0) contrast(1.1) brightness(1.08);
             transform: scale(1.08);
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .hero::before {
+
+            .hero::before,
+            .ring-spin,
+            .frame-inner {
                 animation: none;
             }
         }
@@ -1011,7 +1056,9 @@
             <button id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
         </div>
 
-        <div class="ring" id="ring" aria-hidden="true"></div>
+        <div class="ring" id="ring" aria-hidden="true">
+            <div class="ring-spin" id="ringSpin"></div>
+        </div>
         <div class="hero-scan" aria-hidden="true"></div>
 
         <div class="hero-core reveal" id="heroCore">
@@ -1432,32 +1479,37 @@
 
     <script>
         /* ── Hero ring of frames ── */
-        var RING_IMGS = ['cau_vuot_ai.jpg', 'cao_toc_ai.jpg', 'model-tekla-xe-duc.jpg', 'model-revit-cang-thuy.jpg',
+        var RING_IMGS = ['chandung.jpg', 'cau_vuot_ai.jpg', 'cao_toc_ai.jpg', 'model-tekla-xe-duc.jpg', 'model-revit-cang-thuy.jpg',
             'bim-hero-bg.jpg', 'model-dynamo-dam-ban.jpg', 'model-revit-cau-tan-an.jpg', 'model-tekla-da-giao.jpg',
             'model-planning-p6.jpg', 'cao-toc.jpg', 'model-planning-4d.jpg', 'bim-model-3d.jpg', 'model-grasshopper-tekla.jpg', 'decision-pt.jpg'];
         var ring = document.getElementById('ring');
+        var ringSpin = document.getElementById('ringSpin');
         var isSmall = window.matchMedia('(max-width: 760px)').matches;
         var rx = isSmall ? 48 : 40, ry = isSmall ? 30 : 36;
         RING_IMGS.forEach(function (name, i) {
             var n = RING_IMGS.length;
+            var isPortrait = i === 0;
             var angle = (i / n) * Math.PI * 2 - Math.PI / 2;
             var x = 50 + rx * Math.cos(angle);
             var y = 50 + ry * Math.sin(angle);
-            var size = isSmall ? 70 : (100 + 45 * Math.abs(Math.sin(angle)));
-            var ratio = i % 2 === 0 ? 1.25 : 0.8;
+            var size = isPortrait ? (isSmall ? 86 : 126) : (isSmall ? 70 : (100 + 45 * Math.abs(Math.sin(angle))));
+            var ratio = isPortrait ? 1.15 : (i % 2 === 0 ? 1.25 : 0.8);
             var f = document.createElement('div');
-            f.className = 'frame';
+            f.className = isPortrait ? 'frame frame-portrait' : 'frame';
             f.style.left = x + '%';
             f.style.top = y + '%';
             f.style.width = size + 'px';
             f.style.height = (size * ratio) + 'px';
-            f.style.transform = 'translate(-50%,-50%) rotate(' + ((angle * 180 / Math.PI) * 0.18) + 'deg)';
+            f.style.transform = 'translate(-50%,-50%) rotate(' + (isPortrait ? 0 : (angle * 180 / Math.PI) * 0.18) + 'deg)';
+            var inner = document.createElement('div');
+            inner.className = 'frame-inner';
             var img = document.createElement('img');
             img.src = 'images/' + name;
-            img.alt = '';
+            img.alt = isPortrait ? 'Vũ Ngọc Phát' : '';
             img.loading = i < 4 ? 'eager' : 'lazy';
-            f.appendChild(img);
-            ring.appendChild(f);
+            inner.appendChild(img);
+            f.appendChild(inner);
+            ringSpin.appendChild(f);
         });
 
         /* ── Hero ring mouse parallax ── */
