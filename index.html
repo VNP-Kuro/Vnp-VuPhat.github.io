@@ -269,6 +269,8 @@
             z-index: 2;
             perspective: 1300px;
             transition: transform .5s ease-out;
+            -webkit-mask-image: radial-gradient(ellipse 360px 320px at 50% 54%, transparent 0%, transparent 42%, #000 78%);
+            mask-image: radial-gradient(ellipse 360px 320px at 50% 54%, transparent 0%, transparent 42%, #000 78%);
         }
 
         .ring-spin {
@@ -374,6 +376,8 @@
             line-height: .97;
             letter-spacing: -0.03em;
             overflow: hidden;
+            color: #f3f8ff;
+            text-shadow: 0 4px 26px rgba(2, 6, 16, .9), 0 0 54px rgba(2, 6, 16, .65);
         }
 
         .hero-core h1 span {
@@ -473,6 +477,11 @@
 
             .hero-core h1 {
                 font-size: clamp(1.8rem, 1.5rem + 2.6vw, 2.4rem);
+            }
+
+            .ring {
+                -webkit-mask-image: radial-gradient(ellipse 220px 260px at 50% 54%, transparent 0%, transparent 42%, #000 78%);
+                mask-image: radial-gradient(ellipse 220px 260px at 50% 54%, transparent 0%, transparent 42%, #000 78%);
             }
         }
 
