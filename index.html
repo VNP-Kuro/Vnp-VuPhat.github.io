@@ -81,9 +81,14 @@
             color: inherit;
         }
 
-        .fa-solid,
+        .fa-solid {
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
+        }
+
         .fa-brands {
-            font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome !important;
+            font-family: "Font Awesome 6 Brands" !important;
+            font-weight: 400 !important;
         }
 
         a:focus-visible,
@@ -271,6 +276,24 @@
             inset: 0;
             transform-style: preserve-3d;
             animation: ringSpin3D 90s linear infinite;
+        }
+
+        .ring-floor {
+            position: absolute;
+            left: 50%;
+            top: 66%;
+            width: 1400px;
+            height: 1400px;
+            margin-left: -700px;
+            margin-top: -700px;
+            transform: rotateX(90deg);
+            background-image:
+                linear-gradient(rgba(0, 194, 255, .14) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 194, 255, .14) 1px, transparent 1px);
+            background-size: 56px 56px;
+            -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 68%);
+            mask-image: radial-gradient(circle at center, #000 0%, transparent 68%);
+            opacity: .5;
         }
 
         @keyframes ringSpin3D {
@@ -1062,6 +1085,7 @@
         </div>
 
         <div class="ring" id="ring" aria-hidden="true">
+            <div class="ring-floor"></div>
             <div class="ring-spin" id="ringSpin"></div>
         </div>
         <div class="hero-scan" aria-hidden="true"></div>
