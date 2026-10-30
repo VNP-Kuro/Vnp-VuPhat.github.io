@@ -371,7 +371,6 @@
         }
 
         .hero-core h1 {
-            font-family: 'Be Vietnam Pro', var(--f);
             font-weight: 400;
             font-size: var(--step-hero);
             line-height: .97;
@@ -381,17 +380,21 @@
             text-shadow: 0 4px 26px rgba(2, 6, 16, .9), 0 0 54px rgba(2, 6, 16, .65);
         }
 
-        .hero-core h1 span {
+        .hero-core h1 .glyph-fix {
+            font-family: 'Be Vietnam Pro', var(--f);
+        }
+
+        .hero-core h1>span {
             display: block;
             transform: translateY(100%);
             transition: transform .9s cubic-bezier(.16, 1, .3, 1);
         }
 
-        .hero-core h1 span:nth-child(2) {
+        .hero-core h1>span:nth-child(2) {
             transition-delay: .11s;
         }
 
-        .hero-core.in h1 span {
+        .hero-core.in h1>span {
             transform: translateY(0);
         }
 
@@ -1105,7 +1108,7 @@
             <div class="hero-avatar">
                 <img src="images/chandung.jpg" alt="Vũ Ngọc Phát" />
             </div>
-            <h1><span>VŨ NGỌC PHÁT</span><span>BIM + AI AGENT</span></h1>
+            <h1><span>V<span class="glyph-fix">Ũ</span> NGỌC PHÁT</span><span>BIM + AI AGENT</span></h1>
             <p>BIM hạ tầng giao thông &amp; trợ lý AI cho thiết kế, thi công.</p>
             <a href="#contact" class="btn">Liên hệ</a>
         </div>
